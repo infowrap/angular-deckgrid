@@ -101,7 +101,7 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
                 i = rule.cssRules.length - 1;
 
                 for (i; i >= 0; i = i - 1) {
-                    if (rule.cssRules[i].selectorText.match(/\[(\w*-)?deckgrid\]::?before/g)) {
+                    if (angular.isDefined(rule.cssRules[i].selectorText) && rule.cssRules[i].selectorText.match(/\[(\w*-)?deckgrid\]::?before/g)) {
                         return true;
                     }
                 }
@@ -225,6 +225,8 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
             var self = this;
 
             if (oldModel.length !== newModel.length) {
+                self.$$createColumns();
+            } else if(oldModel.length > 0 && angular.equals(oldModel[0],newModel[0])) {
                 self.$$createColumns();
             }
         };
