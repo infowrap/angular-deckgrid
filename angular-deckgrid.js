@@ -1,4 +1,4 @@
-/*! angular-deckgrid (v0.2.9) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
+/*! angular-deckgrid (v0.3.0) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
 /*
  * angular-deckgrid
  *
@@ -344,7 +344,7 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
             // Okay, the layout has changed.
             // Creating a new column structure is not avoidable.
             //
-            if (layout.columns !== this.$$scope.layout.columns) {
+            if (layout && layout.columns !== this.$$scope.layout.columns) {
                 self.$$scope.layout = layout;
 
                 self.$$scope.$apply(function onApply () {
