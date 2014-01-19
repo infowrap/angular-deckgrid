@@ -229,7 +229,8 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
                     self.$$createColumns();
                 } else if (oldModel.length !== newModel.length) {
                     self.$$createColumns();
-                } else if(oldModel.length > 0 && !angular.equals(oldModel[0],newModel[0])) {
+                // } else if(oldModel.length > 0 && !angular.equals(oldModel[0],newModel[0])) {
+                } else if (oldModel.length > 0 && (angular.isUndefined(self.$$scope.columns) || self.$$scope.columns.length === 0)) {
                     self.$$createColumns();
                 }
             }
