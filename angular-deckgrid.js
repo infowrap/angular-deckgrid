@@ -1,4 +1,4 @@
-/*! angular-deckgrid (v0.2.6) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
+/*! angular-deckgrid (v0.2.7) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
 /*
  * angular-deckgrid
  *
@@ -185,13 +185,16 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
          *
          */
         Deckgrid.prototype.$$getMediaQueries = function $$getMediaQueries () {
-            var stylesheets = [],
-                mediaQueries = [];
+            // var stylesheets = [],
+            var mediaQueries = [];
 
-            stylesheets = Array.prototype.concat.call(
-                Array.prototype.slice.call(document.querySelectorAll('style[type=\'text/css\']')),
-                Array.prototype.slice.call(document.querySelectorAll('link[rel=\'stylesheet\']'))
-            );
+            var sheets = document.styleSheets;
+
+            // stylesheets = Array.prototype.concat.call(
+            //     Array.prototype.slice.call(document.querySelectorAll('style[type=\'text/css\']')),
+            //     Array.prototype.slice.call(document.querySelectorAll('link[rel=\'stylesheet\']'))
+            // );
+
 
             function extractRules (stylesheet) {
                 try {
@@ -219,13 +222,30 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
                 return false;
             }
 
-            angular.forEach(stylesheets, function onIteration (stylesheet) {
-                var rules = extractRules(stylesheet);
+            // for (var i = 0; i < numSheets; i += 1) {
+            //     var rules = sheets[i].cssRules,
+            //             numRules = rules.length;
+
+            //     for (var j = 0; j < numRules; j += 1) {
+            //         if (rules[j].constructor === CSSMediaRule) {
+            //             mqls['mql' + j] = window.matchMedia(rules[j].media.mediaText);
+            //             mqls['mql' + j].addListener(mediaChange);
+            //             mediaChange(mqls['mql' + j]);
+            //         }
+            //     }
+            // }
+
+            angular.forEach(sheets, function onIteration (stylesheet) {
+                // var rules = extractRules(stylesheet);
+                var rules = stylesheet.cssRules;
 
                 angular.forEach(rules, function inRuleIteration (rule) {
-                    if (hasDeckgridStyles(rule)) {
-                        mediaQueries.push($window.matchMedia(rule.media.mediaText));
+                    if (rule.constructor === CSSMediaRule) {
+                        console.log(rule);
                     }
+                    // if (hasDeckgridStyles(rule)) {
+                    //     mediaQueries.push($window.matchMedia(rule.media.mediaText));
+                    // }
                 });
             });
 
