@@ -138,7 +138,7 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
 
                 angular.forEach(rules, function inRuleIteration (rule) {
                     if (rule.constructor === CSSMediaRule && hasDeckgridStyles(rule)) {
-                        console.log(rule);
+                        // console.log(rule);
                         mediaQueries.push($window.matchMedia(rule.media.mediaText));
                     }
                     // if (hasDeckgridStyles(rule)) {

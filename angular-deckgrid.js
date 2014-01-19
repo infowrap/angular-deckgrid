@@ -1,4 +1,4 @@
-/*! angular-deckgrid (v0.2.8) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
+/*! angular-deckgrid (v0.2.9) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
 /*
  * angular-deckgrid
  *
@@ -248,7 +248,7 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
 
                 angular.forEach(rules, function inRuleIteration (rule) {
                     if (rule.constructor === CSSMediaRule && hasDeckgridStyles(rule)) {
-                        console.log(rule);
+                        // console.log(rule);
                         mediaQueries.push($window.matchMedia(rule.media.mediaText));
                     }
                     // if (hasDeckgridStyles(rule)) {
