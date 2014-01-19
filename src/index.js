@@ -13,7 +13,7 @@
 
 angular.module('akoenig.deckgrid', []);
 
-angular.module('akoenig.deckgrid').directive('deckgrid', [
+angular.module('akoenig.deckgrid').directive('deckgridCard', [
 
     'DeckgridDescriptor',
 
@@ -21,6 +21,6 @@ angular.module('akoenig.deckgrid').directive('deckgrid', [
 
         'use strict';
 
-        return DeckgridDescriptor.create();
+        return DeckgridDescriptor.create('card');
     }
 ]);

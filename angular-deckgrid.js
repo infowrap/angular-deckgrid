@@ -1,4 +1,4 @@
-/*! angular-deckgrid (v0.2.2) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
+/*! angular-deckgrid (v0.2.3) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
 /*
  * angular-deckgrid
  *
@@ -14,7 +14,7 @@
 
 angular.module('akoenig.deckgrid', []);
 
-angular.module('akoenig.deckgrid').directive('deckgrid', [
+angular.module('akoenig.deckgrid').directive('deckgridCard', [
 
     'DeckgridDescriptor',
 
@@ -22,9 +22,10 @@ angular.module('akoenig.deckgrid').directive('deckgrid', [
 
         'use strict';
 
-        return DeckgridDescriptor.create();
+        return DeckgridDescriptor.create('card');
     }
 ]);
+
 /*
  * angular-deckgrid
  *
@@ -51,11 +52,13 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
          * directive description object.
          *
          */
-        function Descriptor () {
+        function Descriptor (type) {
             this.restrict = 'AE';
 
+            var infowrapDirective = 'data-bb-wrap-card="card"';
+
             this.template = '<div data-ng-repeat="column in columns" class="{{layout.classList}}">' +
-                                '<div data-ng-repeat="card in column" data-ng-include="cardTemplate"></div>' +
+                                '<div data-ng-repeat="card in column" ' + infowrapDirective + '></div>' +
                             '</div>';
 
             this.scope = {
@@ -90,7 +93,7 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
         Descriptor.prototype.$$link = function $$link (scope, elem, attrs) {
             scope.$on('$destroy', this.$$destroy.bind(this));
 
-            scope.cardTemplate = attrs.cardtemplate;
+            // scope.cardTemplate = attrs.cardtemplate;
 
             scope.mother = scope.$parent;
 
@@ -98,8 +101,8 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
         };
 
         return {
-            create : function create () {
-                return new Descriptor();
+            create : function create (type) {
+                return new Descriptor(type);
             }
         };
     }
