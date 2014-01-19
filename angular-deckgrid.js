@@ -1,4 +1,4 @@
-/*! angular-deckgrid (v0.2.7) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
+/*! angular-deckgrid (v0.2.8) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
 /*
  * angular-deckgrid
  *
@@ -205,16 +205,23 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
             }
 
             function hasDeckgridStyles (rule) {
-                var i = 0;
+                // var i = 0;
 
-                if (!rule.media) {
-                    return false;
-                }
+                // if (!rule.media) {
+                //     return false;
+                // }
 
-                i = rule.cssRules.length - 1;
+                // i = rule.cssRules.length - 1;
 
-                for (i; i >= 0; i = i - 1) {
-                    if (angular.isDefined(rule.cssRules[i].selectorText) && rule.cssRules[i].selectorText.match(/\[(\w*-)?deckgrid\]::?before/g)) {
+                // for (i; i >= 0; i = i - 1) {
+                //     if (angular.isDefined(rule.cssRules[i].selectorText) && rule.cssRules[i].selectorText.match(/\[(\w*-)?deckgrid\]::?before/g)) {
+                //         return true;
+                //     }
+                // }
+
+                for (var i = 0; i < rule.cssRules.length; i++) {
+                    var cssRule = rule.cssRules[i];
+                    if (cssRule.selectorText && cssRule.selectorText.indexOf('deckgrid[data-deckgrid-card]::before') > -1) {
                         return true;
                     }
                 }
@@ -240,8 +247,9 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
                 var rules = stylesheet.cssRules;
 
                 angular.forEach(rules, function inRuleIteration (rule) {
-                    if (rule.constructor === CSSMediaRule) {
+                    if (rule.constructor === CSSMediaRule && hasDeckgridStyles(rule)) {
                         console.log(rule);
+                        mediaQueries.push($window.matchMedia(rule.media.mediaText));
                     }
                     // if (hasDeckgridStyles(rule)) {
                     //     mediaQueries.push($window.matchMedia(rule.media.mediaText));
