@@ -1,4 +1,4 @@
-/*! angular-deckgrid (v0.3.4) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
+/*! angular-deckgrid (v0.3.5) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
 /*
  * angular-deckgrid
  *
@@ -66,10 +66,22 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
             this.restrict = 'AE';
 
             var infowrapDirective = 'data-bb-wrap-card="item"';
+            var learnTemplate = '';
             var additionalTemplate = '';
 
             if (type === 'asset') {
                 infowrapDirective = 'data-bb-wrap-asset="item"';
+                learnTemplate = '<div ' +
+                    'data-ng-if="mother.section.assets.length == 0" ' +
+                    'class="{{layout.classList}}" ' +
+                    '>' +
+                    '<div ' +
+                      'class="component learn" ' +
+                      'data-type="{{mother.section.type}}" ' +
+                      'data-icon="{{mother.section.type}}" ' +
+                      '>' +
+                    '</div>' +
+                  '</div>';
                 additionalTemplate = '<div ' +
                     'class="{{layout.classList}}" ' +
                     'data-ng-if="mother.section.type!=\'file\' && $root.activeWrap.editable" ' +
@@ -101,7 +113,8 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                   '</div>';
             }
 
-            this.template = '<div data-ng-repeat="column in columns" class="{{layout.classList}}">' +
+            this.template = learnTemplate +
+                            '<div data-ng-repeat="column in columns" class="{{layout.classList}}">' +
                                 '<div data-ng-repeat="item in column" ' + infowrapDirective + '></div>' +
                             '</div>' +
                             additionalTemplate;
