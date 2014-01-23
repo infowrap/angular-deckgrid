@@ -33,7 +33,7 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
             if (type === 'asset') {
                 infowrapDirective = 'data-bb-wrap-asset="item"';
                 additionalTemplate = '<div ' +
-                    'class="components" ' +
+                    'class="{{layout.classList}}" ' +
                     'data-ng-if="mother.section.type!=\'file\' && $root.activeWrap.editable" ' +
                     '>' +
                     '<div ' +
@@ -49,7 +49,7 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                       '></div>' +
                   '</div>' +
                   '<div ' +
-                    'class="components" ' +
+                    'class="{{layout.classList}}" ' +
                     'data-ng-if="mother.section.type==\'file\' && $root.isDetailPage && $root.activeWrap.editable" ' +
                     '>' +
                     '<div ' +
@@ -65,8 +65,8 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
 
             this.template = '<div data-ng-repeat="column in columns" class="{{layout.classList}}">' +
                                 '<div data-ng-repeat="item in column" ' + infowrapDirective + '></div>' +
-                                additionalTemplate +
-                            '</div>';
+                            '</div>' +
+                            additionalTemplate;
 
             this.scope = {
                 'model': '=source'
