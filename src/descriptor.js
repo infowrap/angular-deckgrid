@@ -27,10 +27,14 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
         function Descriptor (type) {
             this.restrict = 'AE';
 
-            var infowrapDirective = 'data-bb-wrap-card="card"';
+            var infowrapDirective = 'data-bb-wrap-card="item"';
+
+            if (type === 'asset') {
+                infowrapDirective = 'data-bb-wrap-asset="item"';
+            }
 
             this.template = '<div data-ng-repeat="column in columns" class="{{layout.classList}}">' +
-                                '<div data-ng-repeat="card in column" ' + infowrapDirective + '></div>' +
+                                '<div data-ng-repeat="item in column" ' + infowrapDirective + '></div>' +
                             '</div>';
 
             this.scope = {

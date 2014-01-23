@@ -23,4 +23,14 @@ angular.module('akoenig.deckgrid').directive('deckgridCard', [
 
         return DeckgridDescriptor.create('card');
     }
+]).directive('deckgridAsset', [
+
+    'DeckgridDescriptor',
+
+    function initialize (DeckgridDescriptor) {
+
+        'use strict';
+
+        return DeckgridDescriptor.create('asset');
+    }
 ]);

@@ -1,4 +1,4 @@
-/*! angular-deckgrid (v0.3.0) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
+/*! angular-deckgrid (v0.3.1) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
 /*
  * angular-deckgrid
  *
@@ -23,6 +23,16 @@ angular.module('akoenig.deckgrid').directive('deckgridCard', [
         'use strict';
 
         return DeckgridDescriptor.create('card');
+    }
+]).directive('deckgridAsset', [
+
+    'DeckgridDescriptor',
+
+    function initialize (DeckgridDescriptor) {
+
+        'use strict';
+
+        return DeckgridDescriptor.create('asset');
     }
 ]);
 
@@ -55,10 +65,14 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
         function Descriptor (type) {
             this.restrict = 'AE';
 
-            var infowrapDirective = 'data-bb-wrap-card="card"';
+            var infowrapDirective = 'data-bb-wrap-card="item"';
+
+            if (type === 'asset') {
+                infowrapDirective = 'data-bb-wrap-asset="item"';
+            }
 
             this.template = '<div data-ng-repeat="column in columns" class="{{layout.classList}}">' +
-                                '<div data-ng-repeat="card in column" ' + infowrapDirective + '></div>' +
+                                '<div data-ng-repeat="item in column" ' + infowrapDirective + '></div>' +
                             '</div>';
 
             this.scope = {
