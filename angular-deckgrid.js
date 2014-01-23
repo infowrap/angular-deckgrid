@@ -1,4 +1,4 @@
-/*! angular-deckgrid (v0.3.1) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
+/*! angular-deckgrid (v0.3.2) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
 /*
  * angular-deckgrid
  *
@@ -66,13 +66,44 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
             this.restrict = 'AE';
 
             var infowrapDirective = 'data-bb-wrap-card="item"';
+            var additionalTemplate = '';
 
             if (type === 'asset') {
                 infowrapDirective = 'data-bb-wrap-asset="item"';
+                additionalTemplate = '<div' +
+                    'class="components"' +
+                    'data-ng-if="mother.section.type!=\'file\' && $root.activeWrap.editable"' +
+                    '>' +
+                    '<div' +
+                      'data-resource-edit' +
+                      'class="component new"' +
+                      'data-ng-class="$root.classForSectionType(mother.section)"' +
+                      'data-allow-new="true"' +
+                      'data-id="$root.activeWrap.id"' +
+                      'data-title="{{$root.addComponentTitleForSection(mother.section)}}"' +
+                      'data-type="{{mother.section.type}}"' +
+                      'data-layout="{{mother.section.type}}"' +
+                      'data-modal-class-name="{{$root.classForSectionType(mother.section)}}"' +
+                      '></div>' +
+                  '</div>' +
+                  '<div' +
+                    'class="components"' +
+                    'data-ng-if="mother.section.type==\'file\' && $root.isDetailPage && $root.activeWrap.editable"' +
+                    '>' +
+                    '<div' +
+                      'class="component new"' +
+                      'data-ng-class="$root.classForSectionType(mother.section)"' +
+                      'data-filepicker-btn' +
+                      'data-store-location="S3"' +
+                      'data-target-id="$root.activeWrap.id"' +
+                      'data-target-type="wrap"' +
+                      '></div>' +
+                  '</div>';
             }
 
             this.template = '<div data-ng-repeat="column in columns" class="{{layout.classList}}">' +
                                 '<div data-ng-repeat="item in column" ' + infowrapDirective + '></div>' +
+                                additionalTemplate +
                             '</div>';
 
             this.scope = {
