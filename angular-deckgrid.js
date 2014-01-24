@@ -1,4 +1,4 @@
-/*! angular-deckgrid (v0.3.5) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
+/*! angular-deckgrid (v0.3.6) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
 /*
  * angular-deckgrid
  *
@@ -34,6 +34,16 @@ angular.module('akoenig.deckgrid').directive('deckgridCard', [
 
         return DeckgridDescriptor.create('asset');
     }
+]).directive('deckgridGallery', [
+
+    'DeckgridDescriptor',
+
+    function initialize (DeckgridDescriptor) {
+
+        'use strict';
+
+        return DeckgridDescriptor.create('gallery');
+    }
 ]);
 
 /*
@@ -66,6 +76,7 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
             this.restrict = 'AE';
 
             var infowrapDirective = 'data-bb-wrap-card="item"';
+            var innerContents = '';
             var learnTemplate = '';
             var additionalTemplate = '';
 
@@ -111,11 +122,39 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                       'data-target-type="wrap" ' +
                       '></div>' +
                   '</div>';
+            } else if (type === 'gallery') {
+                infowrapDirective = 'data-ng-click="$event.stopPropagation(); mother.showSlide(item.id);" ' +
+                  'class="image" data-has-image="true"';
+                innerContents =  '<div ' +
+                    'data-unveil-item="item.asset" ' +
+                    'class="contents" ' +
+                    'data-constrain-width="270" ' +
+                    'data-fit="clip"></div>' +
+                  '<div ' +
+                    'data-ng-show="mother.editing" ' +
+                    'data-icon="delete" ' +
+                    'data-ng-click="$event.stopPropagation(); mother.removeImage(item.id);" ' +
+                    '></div> ' +
+                '</div>';
+                additionalTemplate = '<div ' +
+                  'class="image new" ' +
+                  'data-has-image="false" ' +
+                  'data-editor="true" ' +
+                  'data-filepicker-btn ' +
+                  'data-ng-show="mother.editing" ' +
+                  'data-process-when="$root.activeWrap.editable" ' +
+                  'data-store-location="S3" ' +
+                  'data-mime-types="image/*" ' +
+                  'data-target-id="mother.asset.id" ' +
+                  'data-target-parent-id="$root.activeWrap.id" ' +
+                  'data-target-type="gallery" ' +
+                  'data-title="Add Images" ' +
+                  '></div>';
             }
 
             this.template = learnTemplate +
                             '<div data-ng-repeat="column in columns" class="{{layout.classList}}">' +
-                                '<div data-ng-repeat="item in column" ' + infowrapDirective + '></div>' +
+                                '<div data-ng-repeat="item in column" ' + infowrapDirective + '>' + innerContents + '</div>' +
                             '</div>' +
                             additionalTemplate;
 
