@@ -236,10 +236,17 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
             //
             if (layout && layout.columns !== this.$$scope.layout.columns) {
                 self.$$scope.layout = layout;
-
-                self.$$scope.$apply(function onApply () {
+                var onApply = function() {
                     self.$$createColumns();
-                });
+                };
+
+                var phase = self.$$scope.$$phase;
+                if (phase === "$apply" || phase === "$digest") {
+                    // digest in progress, just execute function
+                    onApply();
+                } else {
+                    self.$$scope.$apply(onApply);
+                }
             }
         };
 
