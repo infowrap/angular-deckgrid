@@ -1,4 +1,4 @@
-/*! angular-deckgrid (v0.4.0) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
+/*! angular-deckgrid (v0.4.1) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
 /*
  * angular-deckgrid
  *
@@ -77,7 +77,8 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
             this.compile = function(tElement, tAttrs) {
 
                 var type = tAttrs.deckgrid;
-                var $column = tElement.find('div');
+                var $columnOuterRepeater = tElement.find('[data-ng-repeat="column in columns"]');
+                var $column = tElement.find('[data-ng-repeat="item in column"]');
                 var columnAttrs = {
                     'data-bb-wrap-card':'item'
                 };
@@ -171,7 +172,7 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                 }
 
                 if (learnTemplate) {
-                    $(learnTemplate).insertBefore(tElement);
+                    $(learnTemplate).insertBefore($columnOuterRepeater);
                 }
 
                 if (columnAttrs) {
@@ -185,10 +186,10 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                 }
 
                 if (additionalTemplate) {
-                    $(additionalTemplate).insertAfter(tElement);
+                    $(additionalTemplate).insertAfter($columnOuterRepeater);
                 }
 
-                return this.$$link;
+                return this.$$link.bind(this);
             };
 
             //this.link = this.$$link.bind(this);
