@@ -242,7 +242,7 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
                 };
 
                 var phase = $rootScope.$$phase;
-                if (phase === "$apply" || phase === "$digest") {
+                if (phase === '$apply' || phase === '$digest') {
                     // digest in progress, just execute function
                     onApply();
                 } else {
