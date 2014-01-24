@@ -13,7 +13,7 @@
 
 angular.module('akoenig.deckgrid', []);
 
-angular.module('akoenig.deckgrid').directive('deckgridCard', [
+angular.module('akoenig.deckgrid').directive('deckgrid', [
 
     'DeckgridDescriptor',
 
@@ -21,26 +21,6 @@ angular.module('akoenig.deckgrid').directive('deckgridCard', [
 
         'use strict';
 
-        return DeckgridDescriptor.create('card');
-    }
-]).directive('deckgridAsset', [
-
-    'DeckgridDescriptor',
-
-    function initialize (DeckgridDescriptor) {
-
-        'use strict';
-
-        return DeckgridDescriptor.create('asset');
-    }
-]).directive('deckgridGallery', [
-
-    'DeckgridDescriptor',
-
-    function initialize (DeckgridDescriptor) {
-
-        'use strict';
-
-        return DeckgridDescriptor.create('gallery');
+        return DeckgridDescriptor.create();
     }
 ]);

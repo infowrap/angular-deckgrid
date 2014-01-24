@@ -112,7 +112,8 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
 
                 for (var i = 0; i < rule.cssRules.length; i++) {
                     var cssRule = rule.cssRules[i];
-                    if (cssRule.selectorText && cssRule.selectorText.indexOf('deckgrid[data-deckgrid-card]::before') > -1) {
+                    var selectorText = cssRule.selectorText;
+                    if (selectorText && (selectorText.indexOf('[data-deckgrid') > -1 && selectorText.indexOf(']::before') > -1)) {
                         return true;
                     }
                 }
