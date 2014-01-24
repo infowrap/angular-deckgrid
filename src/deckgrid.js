@@ -15,8 +15,9 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
 
     '$window',
     '$log',
+    '$rootScope',
 
-    function initialize ($window, $log) {
+    function initialize ($window, $log, $rootScope) {
 
         'use strict';
 
@@ -240,7 +241,7 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
                     self.$$createColumns();
                 };
 
-                var phase = self.$$scope.$$phase;
+                var phase = $rootScope.$$phase;
                 if (phase === "$apply" || phase === "$digest") {
                     // digest in progress, just execute function
                     onApply();
