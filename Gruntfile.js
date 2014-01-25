@@ -71,5 +71,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-karma');
     grunt.registerTask('test', ['jshint', 'karma:dist']);
-    grunt.registerTask('default', ['test', 'concat', 'uglify']);
+    grunt.registerTask('default', ['concat', 'uglify']);
 };
