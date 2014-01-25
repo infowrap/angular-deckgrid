@@ -142,6 +142,13 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                       'data-target-type="gallery" ' +
                       'data-title="Add Images" ' +
                       '></div>';
+                } else if (type === 'notification') {
+                    columnAttrs = {
+                        'data-bb-notification-card':'item',
+                        'data-dashboard':'true',
+                        'data-wraps':'mother.wraps',
+                        'data-groups':'mother.groups'
+                    };
                 }
 
                 if (learnTemplate) {
