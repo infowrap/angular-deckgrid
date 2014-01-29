@@ -121,6 +121,7 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                         'data-constrain-width="270" ' +
                         'data-calc-width="{{item.asset.width}}" ' +
                         'data-calc-height="{{item.asset.height}}" ' +
+                        'data-fp-fallback="item.asset.url" ' +
                         '/>' +
                     '<div ' +
                         'data-ng-show="mother.editing" ' +

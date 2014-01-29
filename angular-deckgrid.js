@@ -1,4 +1,4 @@
-/*! angular-deckgrid (v0.4.3) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
+/*! angular-deckgrid (v0.4.4) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
 /*
  * angular-deckgrid
  *
@@ -149,6 +149,7 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                         'data-constrain-width="270" ' +
                         'data-calc-width="{{item.asset.width}}" ' +
                         'data-calc-height="{{item.asset.height}}" ' +
+                        'data-fp-fallback="item.asset.url" ' +
                         '/>' +
                     '<div ' +
                         'data-ng-show="mother.editing" ' +
