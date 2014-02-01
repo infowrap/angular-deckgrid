@@ -1,4 +1,4 @@
-/*! angular-deckgrid (v0.4.4) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
+/*! angular-deckgrid (v0.4.5) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
 /*
  * angular-deckgrid
  *
@@ -77,6 +77,8 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
             this.compile = function(tElement, tAttrs) {
 
                 var type = tAttrs.deckgrid;
+                var extraType = tAttrs.extraType;
+                var extraIcon = tAttrs.extraIcon;
                 var $columnOuterRepeater = tElement.find('[data-ng-repeat="column in columns"]');
                 var $column = tElement.find('[data-ng-repeat="item in column"]');
                 var columnAttrs = {
@@ -178,6 +180,45 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                         'data-wraps':'mother.wraps',
                         'data-groups':'mother.groups'
                     };
+                } else if (type === 'user') {
+
+                    columnAttrs = {
+                        'data-bb-user-row':'item',
+                        'data-user-type':extraType
+                    };
+                    learnTemplate = '<div ' +
+                          'class="component learn" ' +
+                          'data-ng-if="model.length==0" ' +
+                          'data-type="' + extraType + '" ' +
+                          'data-icon="' + extraIcon + '" ' +
+                          '>' +
+                          '<div class="contents"> ' +
+                          '"{{$root.activeWrap.name}}" does not have any ' + extraType + ' at the moment.' +
+                          '</div>' +
+                        '</div>';
+                    additionalTemplate = '<div ' +
+                      'class="component new ' + extraType + '" ' +
+                      'data-bb-share ' +
+                      'data-ng-click="showOptions($event)" ' +
+                      'data-target="$root.activeWrap" ' +
+                      'data-type="' + (extraType === 'followers' ? 'follow' : 'collaborate') + '" ' +
+                      'data-target-name="$root.activeWrap.name" ' +
+                      'data-title="Invite ' + _.capitalize(extraType) + '" ' +
+                      '></div>';
+                } else if (type === 'member') {
+                    columnAttrs = {
+                        'data-bb-user-row':'item',
+                        'data-user-type':extraType
+                    };
+                    additionalTemplate = '<div ' +
+                      'class="component new ' + extraType + '" ' +
+                      'data-bb-share ' +
+                      'data-ng-click="showOptions($event)" ' +
+                      'data-target="mother.group.id" ' +
+                      'data-type="member" ' +
+                      'data-target-name="mother.group.name" ' +
+                      'data-title="Invite Group Members" ' +
+                      '></div>';
                 }
 
                 if (learnTemplate) {
