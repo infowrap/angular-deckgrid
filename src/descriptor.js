@@ -57,16 +57,18 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                 var additionalTemplate = '';
 
                 if (type === 'card') {
-                  learnTemplate = '<div ' +
-                        'class="component learn" ' +
-                        (showLearnIf ? 'data-ng-if="' + showLearnIf + '" ' : '') +
-                        'data-type="' + extraType + '" ' +
-                        'data-icon="' + extraIcon + '" ' +
-                        '>' +
-                        '<div class="contents"> ' +
-                        learnText +
-                        '</div>' +
-                      '</div>';
+                  if (learnText) {
+                    learnTemplate = '<div ' +
+                          'class="component learn" ' +
+                          (showLearnIf ? 'data-ng-if="' + showLearnIf + '" ' : '') +
+                          'data-type="' + extraType + '" ' +
+                          'data-icon="' + extraIcon + '" ' +
+                          '>' +
+                          '<div class="contents"> ' +
+                          learnText +
+                          '</div>' +
+                        '</div>';
+                  }
                 } else if (type === 'asset') {
                     columnAttrs = {
                         'data-bb-wrap-asset':'item'

@@ -1,4 +1,4 @@
-/*! angular-deckgrid (v0.4.6) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
+/*! angular-deckgrid (v0.4.7) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
 /*
  * angular-deckgrid
  *
@@ -85,16 +85,18 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                 var additionalTemplate = '';
 
                 if (type === 'card') {
-                  learnTemplate = '<div ' +
-                        'class="component learn" ' +
-                        (showLearnIf ? 'data-ng-if="' + showLearnIf + '" ' : '') +
-                        'data-type="' + extraType + '" ' +
-                        'data-icon="' + extraIcon + '" ' +
-                        '>' +
-                        '<div class="contents"> ' +
-                        learnText +
-                        '</div>' +
-                      '</div>';
+                  if (learnText) {
+                    learnTemplate = '<div ' +
+                          'class="component learn" ' +
+                          (showLearnIf ? 'data-ng-if="' + showLearnIf + '" ' : '') +
+                          'data-type="' + extraType + '" ' +
+                          'data-icon="' + extraIcon + '" ' +
+                          '>' +
+                          '<div class="contents"> ' +
+                          learnText +
+                          '</div>' +
+                        '</div>';
+                  }
                 } else if (type === 'asset') {
                     columnAttrs = {
                         'data-bb-wrap-asset':'item'
