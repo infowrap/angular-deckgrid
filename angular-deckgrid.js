@@ -1,4 +1,4 @@
-/*! angular-deckgrid (v0.4.7) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
+/*! angular-deckgrid (v0.4.8) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
 /*
  * angular-deckgrid
  *
@@ -239,13 +239,15 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                     $column.html(innerContents);
                 }
 
+                if (learnTemplate) {
+                    $(learnTemplate).insertAfter($columnOuterRepeater);
+                }
+
                 if (additionalTemplate) {
                     $(additionalTemplate).insertAfter($columnOuterRepeater);
                 }
 
-                if (learnTemplate) {
-                    $(learnTemplate).insertAfter($columnOuterRepeater);
-                }
+
 
                 return this.$$link.bind(this);
             };

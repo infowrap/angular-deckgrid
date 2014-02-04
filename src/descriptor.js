@@ -211,13 +211,15 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                     $column.html(innerContents);
                 }
 
+                if (learnTemplate) {
+                    $(learnTemplate).insertAfter($columnOuterRepeater);
+                }
+
                 if (additionalTemplate) {
                     $(additionalTemplate).insertAfter($columnOuterRepeater);
                 }
 
-                if (learnTemplate) {
-                    $(learnTemplate).insertAfter($columnOuterRepeater);
-                }
+
 
                 return this.$$link.bind(this);
             };
