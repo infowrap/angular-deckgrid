@@ -1,4 +1,4 @@
-/*! angular-deckgrid (v0.4.5) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
+/*! angular-deckgrid (v0.4.6) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
 /*
  * angular-deckgrid
  *
@@ -68,17 +68,13 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                                 '<div data-ng-repeat="item in column"></div>' +
                             '</div>';
 
-            // this.template = learnTemplate +
-            //                 '<div data-ng-repeat="column in columns" class="{{layout.classList}}">' +
-            //                     '<div data-ng-repeat="item in column" ' + infowrapDirective + '>' + innerContents + '</div>' +
-            //                 '</div>' +
-            //                 additionalTemplate;
-
             this.compile = function(tElement, tAttrs) {
 
                 var type = tAttrs.deckgrid;
                 var extraType = tAttrs.extraType;
                 var extraIcon = tAttrs.extraIcon;
+                var showLearnIf = tAttrs.showLearnIf;
+                var learnText = tAttrs.learnText;
                 var $columnOuterRepeater = tElement.find('[data-ng-repeat="column in columns"]');
                 var $column = tElement.find('[data-ng-repeat="item in column"]');
                 var columnAttrs = {
@@ -88,7 +84,18 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                 var learnTemplate = '';
                 var additionalTemplate = '';
 
-                if (type === 'asset') {
+                if (type === 'card') {
+                  learnTemplate = '<div ' +
+                        'class="component learn" ' +
+                        (showLearnIf ? 'data-ng-if="' + showLearnIf + '" ' : '') +
+                        'data-type="' + extraType + '" ' +
+                        'data-icon="' + extraIcon + '" ' +
+                        '>' +
+                        '<div class="contents"> ' +
+                        learnText +
+                        '</div>' +
+                      '</div>';
+                } else if (type === 'asset') {
                     columnAttrs = {
                         'data-bb-wrap-asset':'item'
                     };
@@ -188,12 +195,11 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                     };
                     learnTemplate = '<div ' +
                           'class="component learn" ' +
-                          'data-ng-if="model.length==0" ' +
                           'data-type="' + extraType + '" ' +
                           'data-icon="' + extraIcon + '" ' +
                           '>' +
                           '<div class="contents"> ' +
-                          '"{{$root.activeWrap.name}}" does not have any ' + extraType + ' at the moment.' +
+                          learnText +
                           '</div>' +
                         '</div>';
                     additionalTemplate = '<div ' +
@@ -221,10 +227,6 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                       '></div>';
                 }
 
-                if (learnTemplate) {
-                    $(learnTemplate).insertBefore($columnOuterRepeater);
-                }
-
                 if (columnAttrs) {
                     for(var prop in columnAttrs){
                         $column.attr(prop, columnAttrs[prop]);
@@ -237,6 +239,10 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
 
                 if (additionalTemplate) {
                     $(additionalTemplate).insertAfter($columnOuterRepeater);
+                }
+
+                if (learnTemplate) {
+                    $(learnTemplate).insertAfter($columnOuterRepeater);
                 }
 
                 return this.$$link.bind(this);
