@@ -1,4 +1,4 @@
-/*! angular-deckgrid (v0.4.8) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
+/*! angular-deckgrid (v0.4.9) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
 /*
  * angular-deckgrid
  *
@@ -41,9 +41,10 @@ angular.module('akoenig.deckgrid').directive('deckgrid', [
 
 angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
 
+    '$rootScope',
     'Deckgrid',
 
-    function initialize (Deckgrid) {
+    function initialize ($rootScope, Deckgrid) {
 
         'use strict';
 
@@ -98,6 +99,10 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                         '</div>';
                   }
                 } else if (type === 'asset') {
+                    if ($rootScope.isDetailPage) {
+                      // modify semantics of directive naming value on detail views (for css)
+                      tElement.attr('data-deckgrid', 'assets-full');
+                    }
                     columnAttrs = {
                         'data-bb-wrap-asset':'item'
                     };

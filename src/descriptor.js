@@ -13,9 +13,10 @@
 
 angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
 
+    '$rootScope',
     'Deckgrid',
 
-    function initialize (Deckgrid) {
+    function initialize ($rootScope, Deckgrid) {
 
         'use strict';
 
@@ -70,6 +71,10 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                         '</div>';
                   }
                 } else if (type === 'asset') {
+                    if ($rootScope.isDetailPage) {
+                      // modify semantics of directive naming value on detail views (for css)
+                      tElement.attr('data-deckgrid', 'assets-full');
+                    }
                     columnAttrs = {
                         'data-bb-wrap-asset':'item'
                     };
