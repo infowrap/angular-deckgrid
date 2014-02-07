@@ -133,7 +133,7 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                         'data-icon="spinner"' +
                         '></div> ' +
                     '<img ' +
-                        'class="contents" ' +
+                        'class="pusher" ' +
                         'data-pusher-gif ' +
                         'data-constrain-width="270" ' +
                         'data-calc-width="{{item.asset.width}}" ' +
