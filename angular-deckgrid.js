@@ -1,4 +1,4 @@
-/*! angular-deckgrid (v0.5.0) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
+/*! angular-deckgrid (v0.5.1) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
 /*
  * angular-deckgrid
  *
@@ -66,7 +66,8 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
             this.$$deckgrid = null;
 
             this.template = '<div data-ng-repeat="column in columns" class="{{layout.classList}}">' +
-                                '<div data-ng-repeat="item in column"></div>' +
+                                '<div data-ng-repeat-start="item in column"></div>' +
+                                '<div data-ng-repeat-end></div>' +
                             '</div>';
 
             this.compile = function(tElement, tAttrs) {
@@ -77,7 +78,7 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                 var showLearnIf = tAttrs.showLearnIf;
                 var learnText = tAttrs.learnText;
                 var $columnOuterRepeater = tElement.find('[data-ng-repeat="column in columns"]');
-                var $column = tElement.find('[data-ng-repeat="item in column"]');
+                var $column = tElement.find('[data-ng-repeat-start="item in column"]');
                 var columnAttrs = {
                     'data-bb-wrap-card':'item'
                 };
@@ -119,7 +120,7 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                       '</div>';
                     additionalTemplate = '<div ' +
                         'class="{{layout.classList}}" ' +
-                        'data-ng-if="mother.section.type!=\'file\' && $root.activeWrap.editable" ' +
+                        'data-ng-if="mother.section.type!=\'file\' && $parent.$last && $last && $root.activeWrap.editable" ' +
                         '>' +
                         '<div ' +
                           'data-resource-edit ' +
@@ -174,6 +175,7 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                         '></div> ' +
                     '</div>';
                     additionalTemplate = '<div ' +
+                      'data-ng-if="$parent.$last && $last" ' +
                       'class="image new" ' +
                       'data-has-image="false" ' +
                       'data-editor="true" ' +
@@ -210,6 +212,7 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                           '</div>' +
                         '</div>';
                     additionalTemplate = '<div ' +
+                      'data-ng-if="$parent.$last && $last" ' +
                       'class="component new ' + extraType + '" ' +
                       'data-bb-share ' +
                       'data-ng-click="showOptions($event)" ' +
@@ -224,6 +227,7 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                         'data-user-type':extraType
                     };
                     additionalTemplate = '<div ' +
+                      'data-ng-if="$parent.$last && $last" ' +
                       'class="component new ' + extraType + '" ' +
                       'data-bb-share ' +
                       'data-ng-click="showOptions($event)" ' +
@@ -244,12 +248,12 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                     $column.html(innerContents);
                 }
 
-                if (learnTemplate) {
-                    $(learnTemplate).insertAfter($columnOuterRepeater);
+                if (additionalTemplate) {
+                    $(additionalTemplate).insertAfter($column);
                 }
 
-                if (additionalTemplate) {
-                    $(additionalTemplate).insertAfter($columnOuterRepeater);
+                if (learnTemplate) {
+                    $(learnTemplate).insertAfter($columnOuterRepeater);
                 }
 
 
