@@ -140,6 +140,7 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                         'data-groups':'mother.groups'
                     };
                     learnTemplate = '<div ' +
+                          (showLearnIf ? 'data-ng-if="' + showLearnIf + '" ' : '') +
                           'class="component learn" ' +
                           'data-type="' + extraType + '" ' +
                           'data-icon="' + extraIcon + '" ' +

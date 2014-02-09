@@ -1,4 +1,4 @@
-/*! angular-deckgrid (v0.5.4) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
+/*! angular-deckgrid (v0.5.5) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
 /*
  * angular-deckgrid
  *
@@ -168,6 +168,7 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                         'data-groups':'mother.groups'
                     };
                     learnTemplate = '<div ' +
+                          (showLearnIf ? 'data-ng-if="' + showLearnIf + '" ' : '') +
                           'class="component learn" ' +
                           'data-type="' + extraType + '" ' +
                           'data-icon="' + extraIcon + '" ' +
