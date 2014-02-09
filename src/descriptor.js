@@ -139,6 +139,15 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                         'data-wraps':'mother.wraps',
                         'data-groups':'mother.groups'
                     };
+                    learnTemplate = '<div ' +
+                          'class="component learn" ' +
+                          'data-type="' + extraType + '" ' +
+                          'data-icon="' + extraIcon + '" ' +
+                          '>' +
+                          '<div class="contents"> ' +
+                          learnText +
+                          '</div>' +
+                        '</div>';
                 } else if (type === 'user') {
 
                     columnAttrs = {

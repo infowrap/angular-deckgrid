@@ -1,4 +1,4 @@
-/*! angular-deckgrid (v0.5.3) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
+/*! angular-deckgrid (v0.5.4) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
 /*
  * angular-deckgrid
  *
@@ -167,6 +167,15 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                         'data-wraps':'mother.wraps',
                         'data-groups':'mother.groups'
                     };
+                    learnTemplate = '<div ' +
+                          'class="component learn" ' +
+                          'data-type="' + extraType + '" ' +
+                          'data-icon="' + extraIcon + '" ' +
+                          '>' +
+                          '<div class="contents"> ' +
+                          learnText +
+                          '</div>' +
+                        '</div>';
                 } else if (type === 'user') {
 
                     columnAttrs = {
