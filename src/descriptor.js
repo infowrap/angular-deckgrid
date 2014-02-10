@@ -62,7 +62,7 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                   if (learnText) {
                     learnTemplate = '<div ' +
                           'class="component learn" ' +
-                          (showLearnIf ? 'data-ng-if="' + showLearnIf + '" ' : '') +
+                          'data-ng-if="' + (showLearnIf ? showLearnIf + ' && ' : '') + '$parent.$last && $last" ' +
                           'data-type="' + extraType + '" ' +
                           'data-icon="' + extraIcon + '" ' +
                           '>' +
@@ -140,7 +140,7 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                         'data-groups':'mother.groups'
                     };
                     learnTemplate = '<div ' +
-                          (showLearnIf ? 'data-ng-if="' + showLearnIf + '" ' : '') +
+                          'data-ng-if="' + (showLearnIf ? showLearnIf + ' && ' : '') + '$parent.$last && $last" ' +
                           'class="component learn" ' +
                           'data-type="' + extraType + '" ' +
                           'data-icon="' + extraIcon + '" ' +
@@ -156,6 +156,7 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                         'data-user-type':extraType
                     };
                     learnTemplate = '<div ' +
+                          'data-ng-if="$parent.$last && $last" ' +
                           'class="component learn" ' +
                           'data-type="' + extraType + '" ' +
                           'data-icon="' + extraIcon + '" ' +
@@ -201,13 +202,15 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                     $column.html(innerContents);
                 }
 
+                if (learnTemplate) {
+                    $(learnTemplate).insertAfter($column);
+                }
+
                 if (additionalTemplate) {
                     $(additionalTemplate).insertAfter($column);
                 }
 
-                if (learnTemplate) {
-                    $(learnTemplate).insertAfter($columnOuterRepeater);
-                }
+
 
 
 
