@@ -1,4 +1,4 @@
-/*! angular-deckgrid (v0.5.6) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
+/*! angular-deckgrid (v0.5.7) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
 /*
  * angular-deckgrid
  *
@@ -454,7 +454,7 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
             var self = this;
 
             if (!this.$$scope.layout) {
-                return $log.error('angular-deckgrid: No CSS configuration found (see ' +
+                return $log.log('angular-deckgrid: No CSS configuration found (see ' +
                                    'https://github.com/akoenig/angular-deckgrid#the-grid-configuration)');
             }
 
@@ -489,6 +489,8 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
          *
          */
         Deckgrid.prototype.$$getLayout = function $$getLayout () {
+            $log.log("BizBuilt.platform.IS_COMPAT_IE");
+            $log.log(BizBuilt.platform.IS_COMPAT_IE);
             var content = $window.getComputedStyle(this.$$elem, ':before').content,
                 layout;
 
