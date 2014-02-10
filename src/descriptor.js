@@ -80,7 +80,7 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                         'data-bb-wrap-asset':'item'
                     };
                     learnTemplate = '<div ' +
-                        'data-ng-if="section.assets.length == 0" ' +
+                        'data-ng-if="section.assets.length == 1" ' +
                         'class="{{layout.classList}}" ' +
                         '>' +
                         '<div ' +
