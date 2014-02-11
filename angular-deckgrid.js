@@ -1,4 +1,4 @@
-/*! angular-deckgrid (v0.6.1) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
+/*! angular-deckgrid (v0.6.2) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
 /*
  * angular-deckgrid
  *
@@ -493,8 +493,6 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
          *
          */
         Deckgrid.prototype.$$getLayout = function $$getLayout () {
-            $log.log("BizBuilt.platform.IS_COMPAT_IE");
-            $log.log(BizBuilt.platform.IS_COMPAT_IE);
             var content = $window.getComputedStyle(this.$$elem, ':before').content,
                 layout;
 

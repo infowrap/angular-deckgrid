@@ -204,8 +204,6 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
          *
          */
         Deckgrid.prototype.$$getLayout = function $$getLayout () {
-            $log.log("BizBuilt.platform.IS_COMPAT_IE");
-            $log.log(BizBuilt.platform.IS_COMPAT_IE);
             var content = $window.getComputedStyle(this.$$elem, ':before').content,
                 layout;
 
