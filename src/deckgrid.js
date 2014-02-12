@@ -45,26 +45,25 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
             this.$$getLayout().then(function(layout){
                 self.$$scope.layout = layout;
                 self.$$createColumns();
-            });
 
+                //
+                // Register model change.
+                //
+                watcher = self.$$scope.$watch('model', self.$$onModelChange.bind(self), true);
+                self.$$watchers.push(watcher);
 
-            //
-            // Register model change.
-            //
-            watcher = this.$$scope.$watch('model', this.$$onModelChange.bind(this), true);
-            this.$$watchers.push(watcher);
+                //
+                // Register media query change events.
+                //
+                angular.forEach(self.$$getMediaQueries(), function onIteration (rule) {
+                    function onDestroy () {
+                        rule.removeListener(self.$$onMediaQueryChange.bind(self));
+                    }
 
-            //
-            // Register media query change events.
-            //
-            angular.forEach(self.$$getMediaQueries(), function onIteration (rule) {
-                function onDestroy () {
-                    rule.removeListener(self.$$onMediaQueryChange.bind(self));
-                }
+                    rule.addListener(self.$$onMediaQueryChange.bind(self));
 
-                rule.addListener(self.$$onMediaQueryChange.bind(self));
-
-                self.$$watchers.push(onDestroy);
+                    self.$$watchers.push(onDestroy);
+                });
             });
         }
 
@@ -209,7 +208,7 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
          */
         Deckgrid.prototype.$$getLayout = function $$getLayout () {
             var defer = $q.defer();
-            var content, layout, self = this, configLoopLimit = 3, loopCnt = 0;
+            var content, layout, self = this, configLoopLimit = 3, loopCnt = 0, getConfigTimeout;
 
             var getCssConfig = function(){
                 content = $window.getComputedStyle(self.$$elem, ':before').content;
@@ -226,11 +225,15 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
                     layout.classList = content[1].replace(/\./g, ' ').trim();
                 }
 
+                if (getConfigTimeout) {
+                    // cancel any pending timeouts if they exists
+                    $timeout.cancel(getConfigTimeout);
+                }
                 defer.resolve(layout);
             };
 
             var getConfigTimeoutLoop = function(){
-                $timeout(function(){
+                getConfigTimeout = $timeout(function(){
                     getCssConfig();
                     if (content) {
                         resolveLayout();
@@ -249,7 +252,6 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
                 getConfigTimeoutLoop();
             }
 
-            // return layout;
             return defer.promise;
         };
 
