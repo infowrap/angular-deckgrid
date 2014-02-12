@@ -262,27 +262,27 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
          *
          */
         Deckgrid.prototype.$$onMediaQueryChange = function $$onMediaQueryChange () {
-            var self = this,
-                layout = this.$$getLayout();
+            var self = this;
+            this.$$getLayout().then(function(layout){
+                //
+                // Okay, the layout has changed.
+                // Creating a new column structure is not avoidable.
+                //
+                if (layout && layout.columns !== this.$$scope.layout.columns) {
+                    self.$$scope.layout = layout;
+                    var onApply = function() {
+                        self.$$createColumns();
+                    };
 
-            //
-            // Okay, the layout has changed.
-            // Creating a new column structure is not avoidable.
-            //
-            if (layout && layout.columns !== this.$$scope.layout.columns) {
-                self.$$scope.layout = layout;
-                var onApply = function() {
-                    self.$$createColumns();
-                };
-
-                var phase = $rootScope.$$phase;
-                if (phase === '$apply' || phase === '$digest') {
-                    // digest in progress, just execute function
-                    onApply();
-                } else {
-                    self.$$scope.$apply(onApply);
+                    var phase = $rootScope.$$phase;
+                    if (phase === '$apply' || phase === '$digest') {
+                        // digest in progress, just execute function
+                        onApply();
+                    } else {
+                        self.$$scope.$apply(onApply);
+                    }
                 }
-            }
+            });
         };
 
         /**
