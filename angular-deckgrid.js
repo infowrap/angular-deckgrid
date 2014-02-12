@@ -1,4 +1,4 @@
-/*! angular-deckgrid (v0.7.4) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
+/*! angular-deckgrid (v0.7.5) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
 /*
  * angular-deckgrid
  *
@@ -210,10 +210,9 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                         '</div>' +
                       '</div>';
 
-                    additionalTemplate =
-                        '<div ' +
-                          'class="{{layout.classList}}" ' +
-                          '>' +
+                    additionalTemplate = '<div ' +
+                        'class="{{layout.classList}}" ' +
+                        '>' +
                         '<div ' +
                         'class="component new ' + extraType + '" ' +
                         'data-bb-share ' +
@@ -230,15 +229,18 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                         'data-user-type':extraType
                     };
                     additionalTemplate = '<div ' +
-                      'data-ng-if="$parent.$last && $last" ' +
-                      'class="component new ' + extraType + '" ' +
-                      'data-bb-share ' +
-                      'data-ng-click="showOptions($event)" ' +
-                      'data-target="mother.group.id" ' +
-                      'data-type="member" ' +
-                      'data-target-name="mother.group.name" ' +
-                      'data-title="Invite Group Members" ' +
-                      '></div>';
+                        'class="{{layout.classList}}" ' +
+                        '>' +
+                        '<div ' +
+                        'class="component new ' + extraType + '" ' +
+                        'data-bb-share ' +
+                        'data-ng-click="showOptions($event)" ' +
+                        'data-target="mother.group.id" ' +
+                        'data-type="member" ' +
+                        'data-target-name="mother.group.name" ' +
+                        'data-title="Invite Group Members" ' +
+                        '></div>' +
+                        '</div>';
                 }
 
                 if (columnAttrs) {
@@ -260,8 +262,11 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                 }
 
                 if (additionalTemplate) {
-                    // $(additionalTemplate).insertAfter($column);
-                    $(additionalTemplate).insertAfter($columnOuterRepeater);
+                    if (type === 'gallery'){
+                      $(additionalTemplate).insertAfter($column);
+                    } else {
+                      $(additionalTemplate).insertAfter($columnOuterRepeater);
+                    }
                 }
 
 
