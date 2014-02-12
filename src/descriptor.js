@@ -182,26 +182,20 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                         '</div>' +
                       '</div>';
 
-                    // learnTemplate = '<div ' +
-                    //       'data-ng-if="$parent.$last && $last" ' +
-                    //       'class="component learn" ' +
-                    //       'data-type="' + extraType + '" ' +
-                    //       'data-icon="' + extraIcon + '" ' +
-                    //       '>' +
-                    //       '<div class="contents"> ' +
-                    //       learnText +
-                    //       '</div>' +
-                    //     '</div>';
-                    additionalTemplate = '<div ' +
-                      'data-ng-if="$parent.$last && $last" ' +
-                      'class="component new ' + extraType + '" ' +
-                      'data-bb-share ' +
-                      'data-ng-click="showOptions($event)" ' +
-                      'data-target="$root.activeWrap" ' +
-                      'data-type="' + (extraType === 'followers' ? 'follow' : 'collaborate') + '" ' +
-                      'data-target-name="$root.activeWrap.name" ' +
-                      'data-title="Invite ' + _.capitalize(extraType) + '" ' +
-                      '></div>';
+                    additionalTemplate =
+                        '<div ' +
+                          'class="{{layout.classList}}" ' +
+                          '>' +
+                        '<div ' +
+                        'class="component new ' + extraType + '" ' +
+                        'data-bb-share ' +
+                        'data-ng-click="showOptions($event)" ' +
+                        'data-target="$root.activeWrap" ' +
+                        'data-type="' + (extraType === 'followers' ? 'follow' : 'collaborate') + '" ' +
+                        'data-target-name="$root.activeWrap.name" ' +
+                        'data-title="Invite ' + _.capitalize(extraType) + '" ' +
+                        '></div>' +
+                        '</div>';
                 } else if (type === 'member') {
                     columnAttrs = {
                         'data-bb-user-row':'item',
@@ -238,7 +232,8 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                 }
 
                 if (additionalTemplate) {
-                    $(additionalTemplate).insertAfter($column);
+                    // $(additionalTemplate).insertAfter($column);
+                    $(additionalTemplate).insertAfter($columnOuterRepeater);
                 }
 
 
