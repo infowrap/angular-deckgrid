@@ -209,11 +209,10 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
          */
         Deckgrid.prototype.$$getLayout = function $$getLayout () {
             var defer = $q.defer();
-            var content, layout;
-            var configLoopLimit = 3, loopCnt = 0;
+            var content, layout, self = this, configLoopLimit = 3, loopCnt = 0;
 
             var getCssConfig = function(){
-                content = $window.getComputedStyle(this.$$elem, ':before').content;
+                content = $window.getComputedStyle(self.$$elem, ':before').content;
             };
 
             var resolveLayout = function(){
