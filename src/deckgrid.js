@@ -43,8 +43,8 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
             // the column configurations.
             //
             this.$$getLayout().then(function(layout){
-                this.$$scope.layout = layout;
-                this.$$createColumns();
+                self.$$scope.layout = layout;
+                self.$$createColumns();
             });
 
 
