@@ -208,11 +208,11 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                 }
 
                 if (learnTemplate) {
-                    if (type === 'asset') {
-                      $(learnTemplate).insertAfter($columnOuterRepeater);
-                    } else {
-                      $(learnTemplate).insertAfter($column);
-                    }
+                    // if (type === 'asset') {
+                    $(learnTemplate).insertAfter($columnOuterRepeater);
+                    // } else {
+                    //   $(learnTemplate).insertAfter($column);
+                    // }
                 }
 
                 if (additionalTemplate) {
