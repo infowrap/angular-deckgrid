@@ -1,4 +1,4 @@
-/*! angular-deckgrid (v0.6.2) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
+/*! angular-deckgrid (v0.6.3) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
 /*
  * angular-deckgrid
  *
@@ -305,8 +305,10 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
     '$window',
     '$log',
     '$rootScope',
+    '$q',
+    '$timeout',
 
-    function initialize ($window, $log, $rootScope) {
+    function initialize ($window, $log, $rootScope, $q, $timeout) {
 
         'use strict';
 
@@ -329,9 +331,11 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
             // the pseudo "before element." There you have to save all
             // the column configurations.
             //
-            this.$$scope.layout = this.$$getLayout();
+            this.$$getLayout().then(function(layout){
+                this.$$scope.layout = layout;
+                this.$$createColumns();
+            });
 
-            this.$$createColumns();
 
             //
             // Register model change.
@@ -493,10 +497,15 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
          *
          */
         Deckgrid.prototype.$$getLayout = function $$getLayout () {
-            var content = $window.getComputedStyle(this.$$elem, ':before').content,
-                layout;
+            var defer = $q.defer();
+            var content, layout;
+            var configLoopLimit = 3, loopCnt = 0;
 
-            if (content) {
+            var getCssConfig = function(){
+                content = $window.getComputedStyle(this.$$elem, ':before').content;
+            };
+
+            var resolveLayout = function(){
                 content = content.replace(/'/g, '');  // before e.g. '3 .column.size-1of3'
                 content = content.replace(/"/g, '');  // before e.g. "3 .column.size-1of3"
                 content = content.split(' ');
@@ -506,9 +515,32 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
                     layout.columns = (content[0] | 0);
                     layout.classList = content[1].replace(/\./g, ' ').trim();
                 }
+
+                defer.resolve(layout);
+            };
+
+            var getConfigTimeoutLoop = function(){
+                $timeout(function(){
+                    getCssConfig();
+                    if (content) {
+                        resolveLayout();
+                    } else if (loopCnt < configLoopLimit) {
+                        loopCnt++;
+                        getConfigTimeoutLoop();
+                    }
+                }, 300);
+            };
+
+            getCssConfig();
+
+            if (content) {
+                resolveLayout();
+            } else {
+                getConfigTimeoutLoop();
             }
 
-            return layout;
+            // return layout;
+            return defer.promise;
         };
 
         /**
