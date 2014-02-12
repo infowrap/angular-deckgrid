@@ -127,20 +127,24 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                         '></div> ' +
                     '</div>';
                     additionalTemplate = '<div ' +
-                      'data-ng-if="$parent.$last && $last" ' +
-                      'class="image new" ' +
-                      'data-has-image="false" ' +
-                      'data-editor="true" ' +
-                      'data-filepicker-btn ' +
-                      'data-ng-show="mother.editing" ' +
-                      'data-process-when="$root.activeWrap.editable" ' +
-                      'data-store-location="S3" ' +
-                      'data-mime-types="image/*" ' +
-                      'data-target-id="mother.asset.id" ' +
-                      'data-target-parent-id="$root.activeWrap.id" ' +
-                      'data-target-type="gallery" ' +
-                      'data-title="Add Images" ' +
-                      '></div>';
+                        'class="{{layout.classList}}" ' +
+                        '>' +
+                        '<div ' +
+                          'class="image new" ' +
+                          'data-has-image="false" ' +
+                          'data-editor="true" ' +
+                          'data-filepicker-btn ' +
+                          'data-ng-show="mother.editing" ' +
+                          'data-process-when="$root.activeWrap.editable" ' +
+                          'data-store-location="S3" ' +
+                          'data-mime-types="image/*" ' +
+                          'data-target-id="mother.asset.id" ' +
+                          'data-target-parent-id="$root.activeWrap.id" ' +
+                          'data-target-type="gallery" ' +
+                          'data-title="Add Images" ' +
+                          '></div>' +
+                        '</div>';
+
                 } else if (type === 'notification') {
                     columnAttrs = {
                         'data-bb-notification-card':'item',
@@ -234,11 +238,11 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                 }
 
                 if (additionalTemplate) {
-                    if (type === 'gallery'){
-                      $(additionalTemplate).insertAfter($column);
-                    } else {
-                      $(additionalTemplate).insertAfter($columnOuterRepeater);
-                    }
+                    // if (type === 'gallery'){
+                    //   $(additionalTemplate).insertAfter($column);
+                    // } else {
+                    $(additionalTemplate).insertAfter($columnOuterRepeater);
+                    // }
                 }
 
 
