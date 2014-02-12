@@ -1,4 +1,4 @@
-/*! angular-deckgrid (v0.6.8) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
+/*! angular-deckgrid (v0.6.9) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
 /*
  * angular-deckgrid
  *
@@ -77,6 +77,7 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                 var extraIcon = tAttrs.extraIcon;
                 var showLearnIf = tAttrs.showLearnIf;
                 var learnText = tAttrs.learnText;
+                var isExamples = tAttrs.isExamples;
                 var $columnOuterRepeater = tElement.find('[data-ng-repeat="column in columns"]');
                 var $column = tElement.find('[data-ng-repeat-start="item in column"]');
                 var columnAttrs = {
@@ -87,6 +88,10 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                 var additionalTemplate = '';
 
                 if (type === 'card') {
+                  if (isExamples) {
+                    columnAttrs['data-allow-marketing'] = true;
+                  }
+
                   if (learnText) {
                     learnTemplate = '<div ' +
                           'class="component learn" ' +
