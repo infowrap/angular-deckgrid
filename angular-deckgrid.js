@@ -1,4 +1,4 @@
-/*! angular-deckgrid (v0.7.1) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
+/*! angular-deckgrid (v0.7.3) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
 /*
  * angular-deckgrid
  *
@@ -94,15 +94,19 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
 
                   if (learnText) {
                     learnTemplate = '<div ' +
+                        (showLearnIf ? 'data-ng-if="' + showLearnIf + '" ' : '') +
+                        'class="{{layout.classList}}" ' +
+                        '>' +
+                        '<div ' +
                           'class="component learn" ' +
-                          'data-ng-if="' + (showLearnIf ? showLearnIf + ' && ' : '') + '$parent.$last && $last" ' +
                           'data-type="' + extraType + '" ' +
                           'data-icon="' + extraIcon + '" ' +
                           '>' +
                           '<div class="contents"> ' +
                           learnText +
                           '</div>' +
-                        '</div>';
+                        '</div>' +
+                      '</div>';
                   }
                 } else if (type === 'asset') {
                     if ($rootScope.isDetailPage) {
@@ -173,7 +177,10 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                         'data-groups':'mother.groups'
                     };
                     learnTemplate = '<div ' +
-                          'data-ng-if="' + (showLearnIf ? showLearnIf + ' && ' : '') + '$parent.$last && $last" ' +
+                        (showLearnIf ? 'data-ng-if="' + showLearnIf + '" ' : '') +
+                        'class="{{layout.classList}}" ' +
+                        '>' +
+                        '<div ' +
                           'class="component learn" ' +
                           'data-type="' + extraType + '" ' +
                           'data-icon="' + extraIcon + '" ' +
@@ -181,7 +188,8 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                           '<div class="contents"> ' +
                           learnText +
                           '</div>' +
-                        '</div>';
+                        '</div>' +
+                      '</div>';
                 } else if (type === 'user') {
 
                     columnAttrs = {
@@ -189,7 +197,7 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                         'data-user-type':extraType
                     };
                     learnTemplate = '<div ' +
-                        'class="components" ' +
+                        'class="{{layout.classList}}" ' +
                         '>' +
                         '<div ' +
                           'class="component learn" ' +
