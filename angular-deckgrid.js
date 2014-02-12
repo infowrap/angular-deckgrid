@@ -1,4 +1,4 @@
-/*! angular-deckgrid (v0.7.0) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
+/*! angular-deckgrid (v0.7.1) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
 /*
  * angular-deckgrid
  *
@@ -189,7 +189,9 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                         'data-user-type':extraType
                     };
                     learnTemplate = '<div ' +
-                          'data-ng-if="$parent.$last && $last" ' +
+                        'class="components" ' +
+                        '>' +
+                        '<div ' +
                           'class="component learn" ' +
                           'data-type="' + extraType + '" ' +
                           'data-icon="' + extraIcon + '" ' +
@@ -197,7 +199,19 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                           '<div class="contents"> ' +
                           learnText +
                           '</div>' +
-                        '</div>';
+                        '</div>' +
+                      '</div>';
+
+                    // learnTemplate = '<div ' +
+                    //       'data-ng-if="$parent.$last && $last" ' +
+                    //       'class="component learn" ' +
+                    //       'data-type="' + extraType + '" ' +
+                    //       'data-icon="' + extraIcon + '" ' +
+                    //       '>' +
+                    //       '<div class="contents"> ' +
+                    //       learnText +
+                    //       '</div>' +
+                    //     '</div>';
                     additionalTemplate = '<div ' +
                       'data-ng-if="$parent.$last && $last" ' +
                       'class="component new ' + extraType + '" ' +

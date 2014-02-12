@@ -161,7 +161,9 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                         'data-user-type':extraType
                     };
                     learnTemplate = '<div ' +
-                          'data-ng-if="$parent.$last && $last" ' +
+                        'class="components" ' +
+                        '>' +
+                        '<div ' +
                           'class="component learn" ' +
                           'data-type="' + extraType + '" ' +
                           'data-icon="' + extraIcon + '" ' +
@@ -169,7 +171,19 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                           '<div class="contents"> ' +
                           learnText +
                           '</div>' +
-                        '</div>';
+                        '</div>' +
+                      '</div>';
+
+                    // learnTemplate = '<div ' +
+                    //       'data-ng-if="$parent.$last && $last" ' +
+                    //       'class="component learn" ' +
+                    //       'data-type="' + extraType + '" ' +
+                    //       'data-icon="' + extraIcon + '" ' +
+                    //       '>' +
+                    //       '<div class="contents"> ' +
+                    //       learnText +
+                    //       '</div>' +
+                    //     '</div>';
                     additionalTemplate = '<div ' +
                       'data-ng-if="$parent.$last && $last" ' +
                       'class="component new ' + extraType + '" ' +
