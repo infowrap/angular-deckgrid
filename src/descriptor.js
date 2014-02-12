@@ -38,8 +38,7 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
             this.$$deckgrid = null;
 
             this.template = '<div data-ng-repeat="column in columns" class="{{layout.classList}}">' +
-                                '<div data-ng-repeat-start="item in column"></div>' +
-                                '<div data-ng-repeat-end></div>' +
+                                '<div data-ng-repeat="item in column"></div>' +
                             '</div>';
 
             this.compile = function(tElement, tAttrs) {
@@ -51,7 +50,7 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                 var learnText = tAttrs.learnText;
                 var isExamples = tAttrs.isExamples;
                 var $columnOuterRepeater = tElement.find('[data-ng-repeat="column in columns"]');
-                var $column = tElement.find('[data-ng-repeat-start="item in column"]');
+                var $column = tElement.find('[data-ng-repeat="item in column"]');
                 var columnAttrs = {
                     'data-bb-wrap-card':'item'
                 };
@@ -230,19 +229,11 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                 }
 
                 if (learnTemplate) {
-                    // if (type === 'asset') {
                     $(learnTemplate).insertAfter($columnOuterRepeater);
-                    // } else {
-                    //   $(learnTemplate).insertAfter($column);
-                    // }
                 }
 
                 if (additionalTemplate) {
-                    // if (type === 'gallery'){
-                    //   $(additionalTemplate).insertAfter($column);
-                    // } else {
                     $(additionalTemplate).insertAfter($columnOuterRepeater);
-                    // }
                 }
 
 
