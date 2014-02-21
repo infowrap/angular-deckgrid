@@ -114,7 +114,7 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
                 // }
 
                 ///\[(data-)?deckgrid[^\]]*\]::before/g
-                var regexe   = /\[data-deckgrid[^\]]*\]::before/g,
+                var regexe   = /\[(\w*-)?deckgrid[^\]]*\]::?before/g,
                     i        = 0,
                     selector = '';
 
