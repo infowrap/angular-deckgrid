@@ -145,24 +145,12 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
                 // return false;
             }
 
-            // for (var i = 0; i < numSheets; i += 1) {
-            //     var rules = sheets[i].cssRules,
-            //             numRules = rules.length;
-
-            //     for (var j = 0; j < numRules; j += 1) {
-            //         if (rules[j].constructor === CSSMediaRule) {
-            //             mqls['mql' + j] = window.matchMedia(rules[j].media.mediaText);
-            //             mqls['mql' + j].addListener(mediaChange);
-            //             mediaChange(mqls['mql' + j]);
-            //         }
-            //     }
-            // }
-
             angular.forEach(sheets, function onIteration (stylesheet) {
-                var rules = extractRules(stylesheet);
+                //var rules = extractRules(stylesheet);
+                var rules = stylesheet.cssRules;
 
                 angular.forEach(rules, function inRuleIteration (rule) {
-                    if (hasDeckgridStyles(rule)) {
+                    if (rule.constructor === CSSMediaRule && hasDeckgridStyles(rule)) {
                         mediaQueries.push($window.matchMedia(rule.media.mediaText));
                     }
                 });
