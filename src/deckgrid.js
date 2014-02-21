@@ -113,15 +113,35 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
                 //     }
                 // }
 
-                for (var i = 0; i < rule.cssRules.length; i++) {
-                    var cssRule = rule.cssRules[i];
-                    var selectorText = cssRule.selectorText;
-                    if (selectorText && (selectorText.indexOf('[data-deckgrid') > -1 && selectorText.indexOf(']::before') > -1)) {
+                var regexe   = /\[(data-)?deckgrid[^\]]*\]::before/g,
+                    i        = 0,
+                    selector = '';
+
+                if (!rule.media || angular.isUndefined(rule.cssRules)) {
+                    return false;
+                }
+
+                i = rule.cssRules.length - 1;
+
+                for (i; i >= 0; i = i - 1) {
+                    selector = rule.cssRules[i].selectorText;
+
+                    if (angular.isDefined(selector) && selector.match(regexe)) {
                         return true;
                     }
                 }
 
                 return false;
+
+                // for (var i = 0; i < rule.cssRules.length; i++) {
+                //     var cssRule = rule.cssRules[i];
+                //     var selectorText = cssRule.selectorText;
+                //     if (selectorText && (selectorText.indexOf('[data-deckgrid') > -1 && selectorText.indexOf(']::before') > -1)) {
+                //         return true;
+                //     }
+                // }
+
+                // return false;
             }
 
             // for (var i = 0; i < numSheets; i += 1) {
@@ -138,21 +158,33 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
             // }
 
             angular.forEach(sheets, function onIteration (stylesheet) {
-                // var rules = extractRules(stylesheet);
-                var rules = stylesheet.cssRules;
+                var rules = extractRules(stylesheet);
 
                 angular.forEach(rules, function inRuleIteration (rule) {
-                    if (rule.constructor === CSSMediaRule && hasDeckgridStyles(rule)) {
-                        // console.log(rule);
+                    if (hasDeckgridStyles(rule)) {
                         mediaQueries.push($window.matchMedia(rule.media.mediaText));
                     }
-                    // if (hasDeckgridStyles(rule)) {
-                    //     mediaQueries.push($window.matchMedia(rule.media.mediaText));
-                    // }
                 });
             });
 
             return mediaQueries;
+
+            // angular.forEach(sheets, function onIteration (stylesheet) {
+            //     // var rules = extractRules(stylesheet);
+            //     var rules = stylesheet.cssRules;
+
+            //     angular.forEach(rules, function inRuleIteration (rule) {
+            //         if (rule.constructor === CSSMediaRule && hasDeckgridStyles(rule)) {
+            //             // console.log(rule);
+            //             mediaQueries.push($window.matchMedia(rule.media.mediaText));
+            //         }
+            //         // if (hasDeckgridStyles(rule)) {
+            //         //     mediaQueries.push($window.matchMedia(rule.media.mediaText));
+            //         // }
+            //     });
+            // });
+
+            // return mediaQueries;
         };
 
         /**
