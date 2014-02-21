@@ -1,4 +1,4 @@
-/*! angular-deckgrid (v0.7.8) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
+/*! angular-deckgrid (v0.7.9) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
 /*
  * angular-deckgrid
  *
@@ -424,7 +424,8 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
                 //     }
                 // }
 
-                var regexe   = /\[(data-)?deckgrid[^\]]*\]::before/g,
+                ///\[(data-)?deckgrid[^\]]*\]::before/g
+                var regexe   = /\[data-deckgrid[^\]]*\]::before/g,
                     i        = 0,
                     selector = '';
 
