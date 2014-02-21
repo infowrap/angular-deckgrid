@@ -99,21 +99,6 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
             }
 
             function hasDeckgridStyles (rule) {
-                // var i = 0;
-
-                // if (!rule.media) {
-                //     return false;
-                // }
-
-                // i = rule.cssRules.length - 1;
-
-                // for (i; i >= 0; i = i - 1) {
-                //     if (angular.isDefined(rule.cssRules[i].selectorText) && rule.cssRules[i].selectorText.match(/\[(\w*-)?deckgrid\]::?before/g)) {
-                //         return true;
-                //     }
-                // }
-
-                ///\[(data-)?deckgrid[^\]]*\]::before/g
                 var regexe   = /\[(\w*-)?deckgrid[^\]]*\]::?before/g,
                     i        = 0,
                     selector = '';
@@ -133,20 +118,11 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
                 }
 
                 return false;
-
-                // for (var i = 0; i < rule.cssRules.length; i++) {
-                //     var cssRule = rule.cssRules[i];
-                //     var selectorText = cssRule.selectorText;
-                //     if (selectorText && (selectorText.indexOf('[data-deckgrid') > -1 && selectorText.indexOf(']::before') > -1)) {
-                //         return true;
-                //     }
-                // }
-
-                // return false;
             }
 
             angular.forEach(sheets, function onIteration (stylesheet) {
                 //var rules = extractRules(stylesheet);
+                // the above is commented out because it does not work with document.styleSheets
                 var rules = stylesheet.cssRules;
 
                 angular.forEach(rules, function inRuleIteration (rule) {
@@ -157,23 +133,6 @@ angular.module('akoenig.deckgrid').factory('Deckgrid', [
             });
 
             return mediaQueries;
-
-            // angular.forEach(sheets, function onIteration (stylesheet) {
-            //     // var rules = extractRules(stylesheet);
-            //     var rules = stylesheet.cssRules;
-
-            //     angular.forEach(rules, function inRuleIteration (rule) {
-            //         if (rule.constructor === CSSMediaRule && hasDeckgridStyles(rule)) {
-            //             // console.log(rule);
-            //             mediaQueries.push($window.matchMedia(rule.media.mediaText));
-            //         }
-            //         // if (hasDeckgridStyles(rule)) {
-            //         //     mediaQueries.push($window.matchMedia(rule.media.mediaText));
-            //         // }
-            //     });
-            // });
-
-            // return mediaQueries;
         };
 
         /**
