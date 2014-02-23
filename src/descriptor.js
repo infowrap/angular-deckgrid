@@ -105,6 +105,7 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                         'data-unveil-item':'item.asset',
                         'data-constrain-width':'270',
                         'data-fit':'max',
+                        'data-force':'true',
                         'data-has-image':'true'
                     };
                     innerContents =  '<div ' +
