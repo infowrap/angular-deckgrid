@@ -121,11 +121,15 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                         'data-fp-fallback="item.asset.url" ' +
                         '/>' +
                     '<div ' +
-                        'data-ng-show="mother.editing" ' +
-                        'data-icon="delete" ' +
-                        'data-ng-click="$event.stopPropagation(); mother.removeImage(item.id);" ' +
-                        '></div> ' +
-                    '</div>';
+                      'data-iw-multi-select-btn="item" ' +
+                      'data-ng-if="$root.multiSelect.enabled && $root.multiSelect.options.type == \'slide\'"' +
+                      '></div>';
+                    // '<div ' +
+                    //     'data-ng-show="mother.editing" ' +
+                    //     'data-icon="delete" ' +
+                    //     'data-ng-click="$event.stopPropagation(); mother.removeImage(item.id);" ' +
+                    //     '></div> ' +
+                    // '</div>';
                     additionalTemplate = '<div ' +
                         'class="{{layout.classList}}" ' +
                         '>' +
@@ -134,7 +138,7 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                           'data-has-image="false" ' +
                           'data-editor="true" ' +
                           'data-filepicker-btn ' +
-                          'data-ng-show="mother.editing" ' +
+                          'data-ng-show="$root.activeWrap.editable" ' +
                           'data-process-when="$root.activeWrap.editable" ' +
                           'data-store-location="S3" ' +
                           'data-mime-types="image/*" ' +
