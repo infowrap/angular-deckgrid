@@ -87,17 +87,17 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                     columnAttrs = {
                         'data-bb-wrap-asset':'item'
                     };
-                    learnTemplate = '<div ' +
-                        'data-ng-if="mother.section.assets.length == 1" ' +
-                        'class="{{layout.classList}}" ' +
-                        '>' +
-                        '<div ' +
-                          'class="component learn" ' +
-                          'data-type="{{mother.section.type}}" ' +
-                          'data-icon="{{mother.section.type}}" ' +
-                          '>' +
-                        '</div>' +
-                      '</div>';
+                    // learnTemplate = '<div ' +
+                    //     'data-ng-if="mother.section.assets.length == 1" ' +
+                    //     'class="{{layout.classList}}" ' +
+                    //     '>' +
+                    //     '<div ' +
+                    //       'class="component learn" ' +
+                    //       'data-type="{{mother.section.type}}" ' +
+                    //       'data-icon="{{mother.section.type}}" ' +
+                    //       '>' +
+                    //     '</div>' +
+                    //   '</div>';
                 } else if (type === 'gallery') {
                     columnAttrs = {
                         'data-ng-click':'$event.stopPropagation(); mother.showSlide(item.id);',
