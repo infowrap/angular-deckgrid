@@ -135,17 +135,8 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                         '>' +
                         '<div ' +
                           'class="image new" ' +
-                          'data-has-image="false" ' +
-                          'data-editor="true" ' +
-                          'data-filepicker-btn ' +
                           'data-ng-show="$root.activeWrap.editable" ' +
-                          'data-process-when="$root.activeWrap.editable" ' +
-                          'data-store-location="S3" ' +
-                          'data-mime-types="image/*" ' +
-                          'data-target-id="mother.asset.id" ' +
-                          'data-target-parent-id="$root.activeWrap.id" ' +
-                          'data-target-type="gallery" ' +
-                          'data-title="Add Images" ' +
+                          'data-ng-click="$root.addFiles(mother.asset.id)"' +
                           '></div>' +
                         '</div>';
 
