@@ -136,7 +136,7 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                         '<div ' +
                           'class="image new" ' +
                           'data-ng-show="$root.activeWrap.editable" ' +
-                          'data-ng-click="$root.addFiles(mother.asset.id, \'image/*\')"' +
+                          'data-ng-click="$root.addFiles(mother.asset.id, \'gallery\', \'image/*\')"' +
                           '></div>' +
                         '</div>';
 

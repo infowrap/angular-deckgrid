@@ -1,4 +1,4 @@
-/*! angular-deckgrid (v0.8.6) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
+/*! angular-deckgrid (v0.8.7) - Copyright: 2013, André König (andre.koenig@posteo.de) - MIT */
 /*
  * angular-deckgrid
  *
@@ -164,7 +164,7 @@ angular.module('akoenig.deckgrid').factory('DeckgridDescriptor', [
                         '<div ' +
                           'class="image new" ' +
                           'data-ng-show="$root.activeWrap.editable" ' +
-                          'data-ng-click="$root.addFiles(mother.asset.id, \'image/*\')"' +
+                          'data-ng-click="$root.addFiles(mother.asset.id, \'gallery\', \'image/*\')"' +
                           '></div>' +
                         '</div>';
 
